@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from ..database import get_db
 from ..import schemas, crud
+from ..dependencies import get_current_user
 
 
 
@@ -13,7 +14,9 @@ router = APIRouter(
 
 
 @router.post("/")
-def create_note(note:schemas.NoteCreate, db:Session = Depends(get_db)):
+def create_note(note:schemas.NoteCreate, 
+                db:Session = Depends(get_db),
+                user = Depends(get_current_user)):
     return crud.create_note(db,note)
 
 

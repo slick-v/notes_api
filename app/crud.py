@@ -25,5 +25,6 @@ def delete_note(db:Session, note_id:int):
    if note:
        db.delete(note)
        db.commit()
+       print("Deleted")
    return note
       
